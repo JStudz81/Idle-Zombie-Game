@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxclv1ax6kagp"]
+
+[ext_resource type="Texture2D" uid="uid://dcb5swl2rr45g" path="res://addons/kenney_tiny_battle_assets/tilemap_packed.png" id="1_68aqt"]
+[ext_resource type="Script" path="res://zombie.gd" id="1_em0sb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0lp6"]
+atlas = ExtResource("1_68aqt")
+region = Rect2(256, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48hhe"]
+atlas = ExtResource("1_68aqt")
+region = Rect2(272, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gr2ld"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0lp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48hhe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_32yov"]
+radius = 7.0
+height = 14.0
+
+[node name="Zombie" type="RigidBody2D" groups=["zombies"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_em0sb")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gr2ld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_32yov")

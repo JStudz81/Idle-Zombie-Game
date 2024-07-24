@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy4jmpat0owpo"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_rdixn"]
+[ext_resource type="PackedScene" uid="uid://cxclv1ax6kagp" path="res://zombie.tscn" id="2_xfbjp"]
+[ext_resource type="PackedScene" uid="uid://bqy3pxjt5dish" path="res://base.tscn" id="3_x5qqt"]
+
+[sub_resource type="Curve2D" id="Curve2D_54lsi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 1152, 648, 0, 0, 0, 0, 0, 648, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0)
+}
+point_count = 5
+
+[node name="Main" type="Node"]
+script = ExtResource("1_rdixn")
+zombie_scene = ExtResource("2_xfbjp")
+
+[node name="ZombieTimer" type="Timer" parent="."]
+
+[node name="ZombiePath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_54lsi")
+
+[node name="ZombieSpawn" type="PathFollow2D" parent="ZombiePath"]
+position = Vector2(1152, 0)
+rotation = 1.5708
+
+[node name="Base" parent="." instance=ExtResource("3_x5qqt")]
+
+[connection signal="timeout" from="ZombieTimer" to="." method="_on_zombie_timer_timeout"]
